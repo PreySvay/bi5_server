@@ -1,0 +1,19 @@
+{
+  "company": "Lucky Property",
+  "sector": "Health",
+  "lastName": "Cheam",
+  "firstName": "Somange",
+  "position": "Director",
+  "mobile": "012 324 123",
+  "tel": "098 123 123",
+  "fax": "",
+  "website": "www.example.com",
+  "email": "example@gamil.com",
+  "address": {
+    "homeNumber": "#123",
+    "street": "12",
+    "songkat": "Chom Chao",
+    "district": "Por Sen Chey",
+    "city": "Phnom Penh"
+  }
+}

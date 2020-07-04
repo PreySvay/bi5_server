@@ -1,12 +1,12 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
-const CSVtoJSON = require("csvtojson");
-const Profile = require("./models/profile");
+import express from "express";
+import bodyParser from "body-parser";
+import mongoose from "mongoose";
+import CSVtoJSON from "csvtojson";
+import Profile from "./models/profile";
+import config from "./config";
 
 //Connect to database
-const uri =
-  "mongodb+srv://bi5:bi5eliteteam@bi5project-vjvix.mongodb.net/client?retryWrites=true&w=majority";
+const uri = config.uri;
 
 mongoose
   .connect(uri, {
@@ -21,15 +21,26 @@ mongoose
     console.log(err);
   });
 
+//Play around with csv file
+let fileLocation = "./user.csv";
 CSVtoJSON()
-  .fromFile("user.csv")
+  .fromFile(fileLocation)
   .then((users) => {
-    Profile.create(users);
-    console.log(`${this.users} has been added to the database`);
-  })
-  .catch((err) => {
-    console.log(err);
+    users.map((user) => {
+      var newUser = { ...user, address: [user.address, user.company_name] };
+      console.log(newUser);
+    });
   });
+
+// CSVtoJSON()
+//   .fromFile("user.csv")
+//   .then((users) => {
+//     Profile.create(users);
+//     console.log(`${this.users} has been added to the database`);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
 
 //Initialize app
 const app = express();
